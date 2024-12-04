@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .perspective {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+  }
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px #22c55e,
+      0 0 10px #22c55e,
+      0 0 15px #22c55e;
+    border-radius: 15px;
+  }
+
+  50% {
+    box-shadow: 0 0 10px #22c55e,
+      0 0 20px #22c55e,
+      0 0 30px #22c55e;
+    border-radius: 15px;
+  }
+}
+
+.animate-glow {
+  animation: glow 1.5s ease-in-out infinite;
+}
+
+body {
+  overflow-x: hidden;
+}
