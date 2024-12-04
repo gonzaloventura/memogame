@@ -13,7 +13,7 @@ export function GameStats({ timeLeft, score, targetScore }: GameStatsProps) {
       animate={{ y: 0, opacity: 1 }}
       className="fixed bottom-0 left-0 right-0 bg-gray-800/95 py-4 px-8 flex justify-center gap-8 text-green-500"
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 text-3xl">
         <span className="text-green-400">TIEMPO:</span>
         <motion.span
           key={timeLeft}
@@ -24,7 +24,7 @@ export function GameStats({ timeLeft, score, targetScore }: GameStatsProps) {
           {timeLeft}s
         </motion.span>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 text-3xl">
         <span className="text-green-400">PUNTAJE:</span>
         <motion.span
           key={score}
@@ -32,7 +32,7 @@ export function GameStats({ timeLeft, score, targetScore }: GameStatsProps) {
           animate={{ scale: 1 }}
           className="font-bold"
         >
-          {score}/{targetScore}
+          {score}
         </motion.span>
       </div>
     </motion.div>

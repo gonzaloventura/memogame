@@ -12,17 +12,17 @@ export interface Card {
 export const DIFFICULTY_CONFIG: Record<Difficulty, GameConfig> = {
   easy: {
     gridSize: 12,
-    duration: 60,
+    duration: 30,
     targetScore: 60,
   },
   medium: {
     gridSize: 20,
-    duration: 90,
+    duration: 60,
     targetScore: 100,
   },
   hard: {
     gridSize: 24,
-    duration: 120,
+    duration: 90,
     targetScore: 120,
   },
 };

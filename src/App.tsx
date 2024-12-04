@@ -13,13 +13,15 @@ export function App() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showGameOver, setShowGameOver] = useState(false);
+  const [didWin, setDidWin] = useState(false); // Nuevo estado para determinar si ganó
 
-  const startGame = (selectedDifficulty: Difficulty, customTime?: number) => {
+  const startGame = (selectedDifficulty: Difficulty) => {
     setDifficulty(selectedDifficulty);
     setScore(0);
-    setTimeLeft(customTime || DIFFICULTY_CONFIG[selectedDifficulty].duration);
+    setTimeLeft(DIFFICULTY_CONFIG[selectedDifficulty].duration);
     setIsPlaying(true);
     setShowGameOver(false);
+    setDidWin(false);
   };
 
   useEffect(() => {
@@ -32,6 +34,7 @@ export function App() {
             clearInterval(timer);
             setIsPlaying(false);
             setShowGameOver(true);
+            setDidWin(false); // Si se termina el tiempo, el jugador pierde
             return 0;
           }
           return prev - 1;
@@ -43,13 +46,20 @@ export function App() {
   }, [isPlaying, timeLeft]);
 
   const handleScore = (points: number) => {
-    const newScore = score + points;
+    const newScore = Math.max(0, score + points);
     setScore(newScore);
 
     if (difficulty && newScore >= DIFFICULTY_CONFIG[difficulty].targetScore) {
       setIsPlaying(false);
       setShowGameOver(true);
+      setDidWin(true); // Marca la victoria si se alcanza el puntaje objetivo
     }
+  };
+
+  const handleGameEnd = () => {
+    setIsPlaying(false);
+    setShowGameOver(true);
+    setDidWin(true); // Marca la victoria si se completan todas las cartas
   };
 
   const config = difficulty ? DIFFICULTY_CONFIG[difficulty] : null;
@@ -66,6 +76,7 @@ export function App() {
               difficulty={difficulty}
               onScore={handleScore}
               gameTime={timeLeft}
+              onGameEnd={handleGameEnd} // Llama a esta función si se completan todas las cartas
             />
           )
         )}
@@ -76,7 +87,7 @@ export function App() {
               setShowGameOver(false);
               setDifficulty(null);
             }}
-            won={score >= config.targetScore}
+            won={didWin} // Envía el estado de victoria o derrota
             timeleft={timeLeft}
           />
         )}
