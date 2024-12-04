@@ -14,7 +14,7 @@ export function Logo() {
       >
         <Gamepad2 className="w-8 h-8" />
       </motion.div>
-      <span>Juego de la Memoria</span>
+      <span>Memogame</span>
     </motion.div>
   );
 }
